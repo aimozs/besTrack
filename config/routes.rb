@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :exercises
+  resources :projects
+  resources :tasks
   resources :profiles
-  resources :body_parts
   devise_for :users
 
   resources :resources

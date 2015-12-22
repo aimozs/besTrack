@@ -11,27 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124235616) do
-
-  create_table "body_parts", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "shape"
-    t.integer  "focus"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "exercises", force: :cascade do |t|
-    t.string   "name"
-    t.string   "image"
-    t.string   "video"
-    t.text     "description"
-    t.integer  "BodyPart_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "exercises", ["BodyPart_id"], name: "index_exercises_on_BodyPart_id"
+ActiveRecord::Schema.define(version: 20151222061133) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "firstName"
@@ -45,6 +25,32 @@ ActiveRecord::Schema.define(version: 20151124235616) do
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.time     "totalTime"
+    t.time     "remainingTime"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name"
+    t.time     "estimatedTime"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "todos", force: :cascade do |t|
+    t.integer  "task_id"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.time     "spentTime"
+  end
+
+  add_index "todos", ["project_id"], name: "index_todos_on_project_id"
+  add_index "todos", ["task_id"], name: "index_todos_on_task_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
